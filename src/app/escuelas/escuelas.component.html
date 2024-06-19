@@ -1,0 +1,114 @@
+!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./escuelas.component.css">
+    <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
+    <style>
+        /* Establece un ancho fijo para las primeras cuatro columnas */
+        table th:nth-child(-n+4),
+        table td:nth-child(-n+4) {
+            min-width: 150px; /* Ajusta este valor según sea necesario */
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Establece la barra de desplazamiento horizontal */
+        .table-container {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-group">
+            <div class="form-row" style="margin-top: 60px;">
+                <div class="form-header">
+                    <h2>Escuelas</h2>
+                </div>
+            </div>
+            <div class="form-row" style="border-bottom: 2px solid lightgray; margin-top: 10px; padding: 5px;">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Buscar..." [(ngModel)]="filtro" (keyup)="aplicarFiltro()">
+                    <div class="combo-box-container">
+                        <select class="combo-box" [(ngModel)]="filtroSeleccionado" (change)="aplicarFiltro()">
+                            <option value="escuela">Escuela</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="table-container">
+                <table style="width: fit-content;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Escuela</th>
+                            <th>Logo</th>
+                            <th>Clave</th>
+                            <th>Domicilio</th>
+                            <th>Localidad</th>
+                            <th>Zona</th>
+                            <th>Sector</th>
+                            <th>Telefono</th>
+                            <th>No Familias</th>
+                            <th>Cuota</th>
+                            <th>Alumnos</th>
+                            <th>Grupos</th>
+                            <th>Turno</th>
+                            <th>
+                 
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let escuela of escuelas">
+                            <td>{{ escuela.id }}</td>
+                            <td>{{ escuela.nombre }}</td>
+                            <td>{{ escuela.logo }}</td>
+                            <td>{{ escuela.clave }}</td>
+                            <td>{{ escuela.domicilio }}</td>
+                            <td>{{ escuela.localidad }}</td>
+                            <td>{{ escuela.zona }}</td>
+                            <td>{{ escuela.sector }}</td>
+                            <td>{{ escuela.telefono }}</td>
+                            <td>{{ escuela.no_familia }}</td>
+                            <td>{{ escuela.cuota }}</td>
+                            <td>{{ escuela.tt_alumnos }}</td>
+                            <td>{{ escuela.tt_grupos }}</td>
+                            <td>{{ escuela.turno }}</td>
+                            <td>
+                                <div style="display: flex; flex-direction: row;">
+                                 
+
+                                    
+                              
+
+
+                                    <button mat-button (click)="openlogo(escuela.logo)" style="background-color: #5b6ce9; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+                                        <mat-icon>link</mat-icon>
+                                      </button>
+
+                                </div>
+
+                                <div style="display: flex; flex-direction: row;">
+                                    <button mat-icon-button (click)="Openmodificaralumnado(escuela)" class="btn" style="background-color: rgb(208, 194, 138); border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+                                        <mat-icon>people</mat-icon>
+                                      </button>
+
+                                      <button mat-icon-button (click)="Openmodificarlocalizacion(escuela)" class="btn" style="background-color: rgb(215, 177, 54); border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+                                        <mat-icon>school</mat-icon>
+                                      </button>
+
+                            </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./escuelas-supervisor.component.css">
+    <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
+    <style>
+        
+        table th:nth-child(-n+1),
+        table td:nth-child(-n+1) {
+            min-width: 500px; 
+            max-width: 500px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+       
+        .table-container {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-group">
+            <div class="form-row" style="margin-top: 60px;">
+                <div class="form-header">
+                    <h2>Escuelas</h2>
+                </div>
+            </div>
+            <div class="form-row" style="border-bottom: 2px solid lightgray; margin-top: 10px; padding: 5px;">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Buscar..." [(ngModel)]="filtro" (keyup)="aplicarFiltro()">
+                    <div class="combo-box-container">
+                        <select class="combo-box" [(ngModel)]="filtroSeleccionado" (change)="aplicarFiltro()">
+                            <option value="escuela">Escuela</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="table-container">
+                <table style="width: fit-content;">
+                    <thead>
+                        <tr>
+                            <th>Escuelas</th>
+                        
+                            <th>Usernames</th>
+                            <th>ID</th>
+                            <th>Directores</th>
+                            <th>Eliminar Directores</th>
+                            <th>
+                                <button class="btn" [routerLink]="['/crear-escuela']" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+                                    <i class="fa-solid fa-plus"></i> Registrar Escuela
+                                </button>
+
+                                <button class="btn" [routerLink]="['/crear-usuarios_supervisor']" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+                                    <i class="fa-solid fa-plus"></i> Registrar Director
+                                </button>
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let escuela of escuelas">
+                            <td>{{ escuela.escuela }}</td>
+                            <td>{{ escuela.username }}</td>
+                            <td>{{ escuela.id }}</td>
+                            <td>{{ escuela.director }}</td>
+                        
+
+                            <td>      
+                            <button mat-button (click)="openConfirmationDialog(escuela.id)"class="btn" style="background-color: #f44336; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">                                
+                                <mat-icon>delete</mat-icon> 
+                            </button> 
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

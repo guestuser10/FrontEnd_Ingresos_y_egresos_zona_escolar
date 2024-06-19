@@ -1,0 +1,31 @@
+<header>
+  <div class="left-section">
+    <div class="logo-container" *ngIf="escuelaLogo && !hideLogo">
+      <img [src]="escuelaLogo" alt="Logo de la escuela" (click)="openLogo()">
+    </div>
+  </div>
+
+  <div class="middle-section" *ngIf="shouldShowMiddleSection()">
+    <nav>
+      <ul>
+        <!-- Mostrar solo si el rol es "supervisor" -->
+        <li *ngIf="isSupervisor()"><a routerLink="/supervisor">Inicio</a></li>
+        <li *ngIf="isSupervisor()"><a routerLink="/datos_supervisor">Supervisor</a></li>
+        <li *ngIf="isSupervisor()"><a routerLink="/supervisor_escuelas">Escuelas</a></li>
+
+        <!-- Mostrar solo si el rol NO es "supervisor" -->
+        <li *ngIf="!isSupervisor()"><a routerLink="/inicio">Inicio</a></li>
+        <li *ngIf="isDirector()"><a routerLink="/user">Usuarios</a></li>
+        <li *ngIf="isDirector()"><a routerLink="/escuelas">Escuelas</a></li>
+        <li *ngIf="!isSupervisor()"><a routerLink="/categorias">Categorias</a></li>
+        <li *ngIf="!isSupervisor()"><a routerLink="/iye">Egresos</a></li>
+        <li *ngIf="!isSupervisor()"><a routerLink="/iysine">Ingresos</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="right-section" *ngIf="shouldShowRightSection()">
+    <span>Usuario: {{ username }}</span>
+    <button (click)="logout()">Cerrar Sesión</button>
+  </div>
+</header>

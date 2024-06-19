@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./crear-ingreso.component.css">
+    <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container" >
+        <div class="form-row" style="margin-top: 200px; padding:10px;">
+        </div>
+
+        <form (ngSubmit)="onSubmit()" class="container" style="padding: 30px;">
+            <div class="form-row" style="border-bottom: 2px solid lightgray; margin-top: 10px;">
+                <div style="width: 90%;">
+                    <h4>Informacion Basica</h4>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Nombre">Nombre de la categoria:</label>
+                    <select name="" id="Nombre" name="Nombre" [(ngModel)]="ingresos.category" (input)="checkCategory()" required>
+                        <option *ngFor="let item of cbingresos" [value]="item.nombre">{{ item.nombre }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Otros">Especificar otros (solo en categoria Otros):</label>
+                    <input type="text" id="Otros" name="Otros" [(ngModel)]="ingresos.otros_especificar" [disabled]="ingresos.category.toLowerCase() !== 'otros'" required>
+                </div>
+                <div class="form-group">
+                    <label for="Cantidad">Cantidad:</label>
+                    <input type="text" id="Cantidad" name="Cantidad" [(ngModel)]="ingresos.amount" required>
+                </div>
+            </div>
+
+            <button type="submit" class="send-form">Añadir</button>
+            <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+        </form>
+    </div>
+    
+    <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
+</body>
+</html>
